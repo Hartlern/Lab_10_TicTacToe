@@ -1,3 +1,57 @@
+//START GAME
+//
+//        REPEAT
+//        INITIALIZE board to empty spaces
+//        SET currentPlayer to "X"
+//        SET gameOver to false
+//
+//        WHILE gameOver is false:
+//        DISPLAY the current board
+//        ASK currentPlayer to make a move (row and column)
+//        IF the move is valid:
+//        PLACE currentPlayer's symbol on the board at the given position
+//        IF currentPlayer has won:
+//        DISPLAY "currentPlayer wins"
+//        SET gameOver to true
+//        ELSE IF the game is a tie:
+//        DISPLAY "Tie"
+//        SET gameOver to true
+//        ELSE:
+//        SWITCH to the next player
+//        ELSE:
+//        DISPLAY "Invalid Move. Try again"
+//
+//        ASK if the player wants to play again (Y/N)
+//        UNTIL player chooses not to play again
+//
+//        DISPLAY "Goodbye"
+//        END GAME
+//
+//
+//        FUNCTION clearBoard:
+//        FOR each row and column on the board:
+//        SET the cell to an empty space
+//
+//        FUNCTION display:
+//        PRINT the board with row and column numbers
+//
+//        FUNCTION isValidMove(row, col):
+//        RETURN true if the cell is empty, else false
+//
+//        FUNCTION isWin(player):
+//        RETURN true if the player has won (by row, column, or diagonal)
+//
+//        FUNCTION isRowWin(player):
+//        RETURN true if any row is completely filled by the player
+//
+//        FUNCTION isColWin(player):
+//        RETURN true if any column is completely filled by the player
+//
+//        FUNCTION isDiagonalWin(player):
+//        RETURN true if any diagonal is completely filled by the player
+//
+//        FUNCTION isTie:
+//        RETURN true if all spaces are filled and there's no winner
 import java.util.Scanner;
 
 public class TicTacToe
@@ -11,6 +65,7 @@ public class TicTacToe
 
     public static void main( String[] args )
     {
+        int moveCounter = 0;
         do
         {
             //clear the board for each new game
@@ -33,10 +88,13 @@ public class TicTacToe
                 {//is valid move between ranged int-1
                     // Make the move for the current player
                     board[ row ][ col ] = currentPlayer;
+                    moveCounter = moveCounter + 1;
+                    System.out.println("Move: " + moveCounter);
 
                     // Check if player has won(couldnt figure out checking this after 5 moves)
                     if( isWin( currentPlayer ) )
                     {
+                        moveCounter = 0;
                         display();
                         System.out.println( "Player " + currentPlayer + " wins!" );
                         gameOver = true;
@@ -46,6 +104,7 @@ public class TicTacToe
                     {
                         display();
                         System.out.println( "It's a tie!" );
+                        moveCounter = 0;
                         gameOver = true;
                     }
                     // Switch to the other player
